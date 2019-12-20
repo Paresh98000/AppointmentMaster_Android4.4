@@ -12,6 +12,8 @@
         android:roundIcon="@drawable/appointmentmaster"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5086753515756321~7788115596"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
