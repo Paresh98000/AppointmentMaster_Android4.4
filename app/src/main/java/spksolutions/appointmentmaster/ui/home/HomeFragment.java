@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
         mR_LayoutManager = new LinearLayoutManager(getActivity());
         mR_View.setLayoutManager(mR_LayoutManager);
 
-        Recycle_Home adapter = new Recycle_Home(new String[]{"Hellow","Paresh"},new String[]{"Hi...","Desc"},new String[]{"Hi...","Add"},new String[]{"Hi...",""},new int[]{R.drawable.appointment_1,R.drawable.appointment});
+        Recycle_Home adapter = new Recycle_Home(new String[]{"Nothing new found"},new String[]{""},new String[]{""},new String[]{""},new int[]{0});
         mR_View.setAdapter(adapter);
 
         final TextView textView = root.findViewById(R.id.text_home);
@@ -49,6 +49,4 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
-
-
 }

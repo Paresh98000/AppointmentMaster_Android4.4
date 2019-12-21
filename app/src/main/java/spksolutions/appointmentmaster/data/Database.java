@@ -17,9 +17,10 @@ public class Database {
         try {
             data = SQLiteDatabase.openOrCreateDatabase(path+"/database", null);
             Log.d(" - Log Message: "," Successfull");
+            data.rawQuery("Create table Appointment (Id int,ClientId int,ServiceId int,Date string,Time string);",null);
         }
         catch (Exception e){
-            Log.d(" - Log Message: ",e.toString());
+            Log.d(" - Log Message Error: ",e.toString());
         }
         Log.d(" - LogMessage: ",path);
     }
