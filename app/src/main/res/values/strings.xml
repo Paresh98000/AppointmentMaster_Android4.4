@@ -28,5 +28,5 @@
     <string name="menu_signIn">User Sign In</string>
     <string name="menu_signUp">User Sign Up</string>
     <string name="menu_search">Search</string>
-    <string name="search_hint">Appointment</string>
+    <string name="search_hint">Search time, location, service etc.</string>
 </resources>

@@ -15,19 +15,10 @@
         android:roundIcon="@drawable/appointmentmaster"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity"
-            android:launchMode="singleTop">
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-        </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5086753515756321~7788115596" />
+            android:value="ca-app-pub-5086753515756321~7788115596" />        
 
         <activity
             android:name=".MainActivity"
@@ -37,10 +28,25 @@
                 android:value=".SearchActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".SearchActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        
+        <provider
+            android:authorities="spksolutions.appointmentmaster.suggestionProvider"
+            android:name=".ContentProviderForSearchSuggesion"
+            />
+        
     </application>
 
 </manifest>

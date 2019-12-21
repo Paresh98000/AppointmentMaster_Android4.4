@@ -1,6 +1,7 @@
 package spksolutions.appointmentmaster;
 
 import android.app.SearchManager;
+import android.content.SearchRecentSuggestionsProvider;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.content.Context;
 import android.content.Intent;
+
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         // Associate searchable configuration with the SearchView
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -76,13 +77,23 @@ public class MainActivity extends AppCompatActivity {
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
 
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryRefinementEnabled(true);
+        //searchView.setIconifiedByDefault(false);
+
+
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Toast.makeText(getBaseContext(),item.getTitle().toString(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(),item.getTitle().toString(),Toast.LENGTH_LONG).show();
+
+        if(item.getItemId() == R.id.menu_search){
+            //item.setVisible(true);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -91,14 +102,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
-    }
-
-    @Override
-    public boolean onSearchRequested() {
-
-        Intent i = new Intent();
-        Toast.makeText(getBaseContext(),"Seach from keyboard",Toast.LENGTH_LONG).show();
-        return super.onSearchRequested();
     }
 
     public void logout(View v){
