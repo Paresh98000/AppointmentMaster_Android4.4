@@ -2,6 +2,7 @@ package spksolutions.appointmentmaster;
 
 import android.app.SearchManager;
 import android.content.SearchRecentSuggestionsProvider;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Database data;
+    public static String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        data = new Database(getFileStreamPath("").getAbsolutePath());
+        //data = new Database(getFileStreamPath("").getAbsolutePath());
+        path = getFileStreamPath("").getAbsolutePath();
+        DatabaseProvider provider = new DatabaseProvider();
+        provider.query(Uri.parse(provider.AUTHORITY+"/"+provider.TABLE_APPOINTMENT+"/1"),null,null,null,null);
     }
 
     @Override

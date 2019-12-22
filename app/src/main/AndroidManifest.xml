@@ -44,7 +44,12 @@
         
         <provider
             android:authorities="spksolutions.appointmentmaster.suggestionProvider"
-            android:name=".ContentProviderForSearchSuggesion"
+            android:name=".ContentProviderForSearchSuggestion"
+            />
+
+        <provider
+            android:authorities="spksolutions.appointmentmaster.dataProvider"
+            android:name=".DatabaseProvider"
             />
         
     </application>
