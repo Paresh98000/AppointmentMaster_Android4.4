@@ -7,31 +7,61 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="spksolutions.appointmentmaster.ui.home.HomeFragment"
+        android:name="com.spksolutions.appointmentmaster.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_appointment"
-        android:name="spksolutions.appointmentmaster.mui.appointment.AppointmentFragment"
+        android:name="com.spksolutions.appointmentmaster.mui.appointment.AppointmentFragment"
         android:label="@string/menu_appointment"
         tools:layout="@layout/fragment_appointment" />
 
     <fragment
         android:id="@+id/nav_schedule"
-        android:name="spksolutions.appointmentmaster.mui.schedule.ScheduleFragment"
+        android:name="com.spksolutions.appointmentmaster.mui.schedule.ScheduleFragment"
         android:label="@string/menu_schedule"
         tools:layout="@layout/fragment_schedule" />
 
     <fragment
         android:id="@+id/nav_service"
-        android:name="spksolutions.appointmentmaster.mui.service.ServiceFragment"
+        android:name="com.spksolutions.appointmentmaster.mui.service.ServiceFragment"
         android:label="@string/menu_service"
         tools:layout="@layout/fragment_service" />
 
     <fragment
+        android:id="@+id/nav_message"
+        android:name="com.spksolutions.appointmentmaster.mui.message.MessageFragment"
+        android:label="@string/menu_message"
+        tools:layout="@layout/fragment_message" />
+
+    <fragment
+        android:id="@+id/nav_user_sign_in"
+        android:name="com.spksolutions.appointmentmaster.mui.user.SignInFragment"
+        android:label="@string/menu_user_sign_in"
+        tools:layout="@layout/fragment_user_sign_in" />
+
+    <fragment
+        android:id="@+id/nav_user_sign_up"
+        android:name="com.spksolutions.appointmentmaster.mui.user.SignUpFragment"
+        android:label="@string/menu_user_sign_up"
+        tools:layout="@layout/fragment_user_sign_up" />
+
+    <fragment
+        android:id="@+id/nav_sp_sign_in"
+        android:name="com.spksolutions.appointmentmaster.mui.sp.SignInFragment"
+        android:label="@string/menu_sp_signIn"
+        tools:layout="@layout/fragment_sp_sign_in" />
+
+    <fragment
+        android:id="@+id/nav_sp_sign_up"
+        android:name="com.spksolutions.appointmentmaster.mui.sp.SignUpFragment"
+        android:label="@string/menu_sp_signUp"
+        tools:layout="@layout/fragment_sp_sign_up" />
+
+    <fragment
         android:id="@+id/nav_logout"
-        android:name="spksolutions.appointmentmaster.mui.logout.LogoutFragment"
+        android:name="com.spksolutions.appointmentmaster.mui.logout.LogoutFragment"
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
 

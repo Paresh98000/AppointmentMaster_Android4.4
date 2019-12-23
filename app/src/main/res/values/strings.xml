@@ -29,4 +29,8 @@
     <string name="menu_signUp">User Sign Up</string>
     <string name="menu_search">Search</string>
     <string name="search_hint">Search time, location, service etc.</string>
+    <string name="menu_chat">Messages</string>
+    <string name="menu_message">Message</string>
+    <string name="menu_user_sign_in">User Sign In</string>
+    <string name="menu_user_sign_up">User Sign Up</string>
 </resources>

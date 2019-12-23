@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "980981162288",
+    "firebase_url": "https://appointmentmastersem6.firebaseio.com",
+    "project_id": "appointmentmastersem6",
+    "storage_bucket": "appointmentmastersem6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980981162288:android:84173fa8e23c9262f2a8f5",
+        "android_client_info": {
+          "package_name": "com.spksolutions.appointmentmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980981162288-f90o4ihfqb0cksclgrumhi6ebclpi264.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spksolutions.appointmentmaster",
+            "certificate_hash": "0a1a2cd1808ccfdca1b1b677c374c39eca4494a3"
+          }
+        },
+        {
+          "client_id": "980981162288-gf01nio333kmvruediej52gqrr4skjs1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0nVYOVSk8Ro3Rg1An_mRIZZvfoI4T9Bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980981162288-gf01nio333kmvruediej52gqrr4skjs1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

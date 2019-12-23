@@ -12,7 +12,7 @@
         android:text="TextView"
         android:visibility="gone"/>
 
-    <spksolutions.appointmentmaster.util.GifImageView
+    <com.spksolutions.appointmentmaster.util.GifImageView
         android:id="@+id/gifimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

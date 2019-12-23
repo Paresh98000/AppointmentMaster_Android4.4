@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="spksolutions.appointmentmaster">
+    package="com.spksolutions.appointmentmaster">
 
     <dist:module dist:instant="true" />
 
@@ -43,12 +43,12 @@
         </activity>
         
         <provider
-            android:authorities="spksolutions.appointmentmaster.suggestionProvider"
+            android:authorities="com.spksolutions.appointmentmaster.suggestionProvider"
             android:name=".ContentProviderForSearchSuggestion"
             />
 
         <provider
-            android:authorities="spksolutions.appointmentmaster.dataProvider"
+            android:authorities="com.spksolutions.appointmentmaster.dataProvider"
             android:name=".DatabaseProvider"
             />
         

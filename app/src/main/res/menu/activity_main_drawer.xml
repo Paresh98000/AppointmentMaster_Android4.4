@@ -46,16 +46,27 @@
         </menu>
     </item>
 
+    <item android:title="Communication">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_message"
+                    android:icon="@drawable/chat"
+                    android:title="@string/menu_chat" />
+            </group>
+        </menu>
+    </item>
+
     <item android:title="User">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_signIn"
+                    android:id="@+id/nav_user_sign_in"
                     android:icon="@drawable/signin"
                     android:title="@string/menu_signIn" />
 
                 <item
-                    android:id="@+id/nav_signUp"
+                    android:id="@+id/nav_user_sign_up"
                     android:icon="@drawable/signup"
                     android:title="@string/menu_signUp" />
             </group>
@@ -66,22 +77,23 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_sp_signIn"
+                    android:id="@+id/nav_sp_sign_in"
                     android:icon="@drawable/service_2"
-                    android:title="@string/menu_sp_signIn"
-                    />
+                    android:title="@string/menu_sp_signIn" />
 
                 <item
-                    android:id="@+id/nav_sp_signUp"
+                    android:id="@+id/nav_sp_sign_up"
                     android:icon="@drawable/sp_signup"
-                    android:title="@string/menu_sp_signUp"
-                    />
-
+                    android:title="@string/menu_sp_signUp" />
             </group>
         </menu>
     </item>
 
-    <item android:title="Communication">
+    <group android:checkableBehavior="single">
+
+    </group>
+
+    <item android:title="Account">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -91,6 +103,7 @@
             </group>
         </menu>
     </item>
+
     <!--    <group>-->
 
     <!--    </group>-->
