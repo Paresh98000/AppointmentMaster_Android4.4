@@ -1,6 +1,7 @@
 package com.spksolutions.appointmentmaster;
 
 import android.app.SearchManager;
+import android.content.ContentValues;
 import android.content.SearchRecentSuggestionsProvider;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -28,6 +29,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.spksolutions.appointmentmaster.R;
 
 import com.spksolutions.appointmentmaster.data.Database;
@@ -35,15 +39,19 @@ import com.spksolutions.appointmentmaster.data.Database;
 import android.view.Menu;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Database data;
     private SharedPreferences preferences;
+    DatabaseProvider provider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -72,16 +80,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        provider = new DatabaseProvider();
         //data = new Database(getFileStreamPath("").getAbsolutePath());
+
+        provider.setPreferences(getPath(),getApplicationContext().getPackageName());
+        provider.query(Uri.parse(provider.AUTHORITY+"/"+provider.TABLE_APPOINTMENT+"/22"),null,null,null,null);
+        ContentValues val = new ContentValues();
+        val.put(DatabaseProvider.CITY_ID,"30");
+        val.put(DatabaseProvider.CITY_NAME,"Jamnagar");
+        provider.insert(DatabaseProvider.CITY_URI,val);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        DatabaseProvider provider = new DatabaseProvider();
-        provider.setPreferences(getPath(),getApplicationContext().getPackageName());
-        provider.query(Uri.parse(provider.AUTHORITY+"/"+provider.TABLE_APPOINTMENT+"/22"),null,null,null,null);
     }
 
 

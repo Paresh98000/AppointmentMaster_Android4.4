@@ -43,21 +43,21 @@ public class Database {
             Log.d(" - Log Message: ", " Successfull");
             String createAppointment = "CREATE TABLE IF NOT EXISTS `appointment` (\n" +
                     "  `id` int(11) PRIMARY KEY ,\n" +
-                    "  `clientid_id` int(11) NOT NULL,\n" +
-                    "  `serviceid_id` int(11) NOT NULL,\n" +
-                    "  `time` time(6) NOT NULL,\n" +
-                    "  `date` date NOT NULL,\n" +
-                    "  `description` varchar(288) NOT NULL,\n" +
-                    "  `status` varchar(10) NOT NULL,\n" +
-                    "  `payment_status` varchar(10) NOT NULL\n" +
+                    "  `clientid_id` int(11) ,\n" +
+                    "  `serviceid_id` int(11) ,\n" +
+                    "  `time` time(6) ,\n" +
+                    "  `date` date ,\n" +
+                    "  `description` varchar(288) ,\n" +
+                    "  `status` varchar(10) ,\n" +
+                    "  `payment_status` varchar(10) \n" +
                     ");\n";
 
             data.execSQL(createAppointment);
 
             String createCity =
                     "CREATE TABLE IF NOT EXISTS `city` (\n" +
-                            "  `id` int(11) ,\n" +
-                            "  `name` varchar(30) NOT NULL\n" +
+                            "  `id` int(11) primary key,\n" +
+                            "  `name` varchar(30) \n" +
                             ");\n";
 
             data.execSQL(createCity);
@@ -75,54 +75,54 @@ public class Database {
 
             String createClient =
                     "CREATE TABLE IF NOT EXISTS `client` (\n" +
-                            "  `id` int(11) NOT NULL Primary Key,\n" +
-                            "  `name` varchar(30)  NOT NULL,\n" +
-                            "  `gender` varchar(6)  NOT NULL,\n" +
-                            "  `password` varchar(30)  NOT NULL,\n" +
-                            "  `phone_no` varchar(10)  NOT NULL,\n" +
-                            "  `email` varchar(128)  NOT NULL,\n" +
-                            "  `city` varchar(20)  NOT NULL\n" +
+                            "  `id` int(11) primary key,\n" +
+                            "  `name` varchar(30)  ,\n" +
+                            "  `gender` varchar(6)  ,\n" +
+                            "  `password` varchar(30)  ,\n" +
+                            "  `phone_no` varchar(10)  ,\n" +
+                            "  `email` varchar(128)  ,\n" +
+                            "  `city` varchar(20)  \n" +
                             ");\n";
 
             data.execSQL(createClient);
 
             String createOrders =
                     "CREATE TABLE IF NOT EXISTS `orders` (\n" +
-                            "  `id` int(11) NOT NULL Primary Key,\n" +
-                            "  `date_and_time` datetime(6) NOT NULL,\n" +
-                            "  `status` varchar(10) NOT NULL,\n" +
-                            "  `amount` double NOT NULL,\n" +
-                            "  `appointmentid_id` int(11) NOT NULL\n" +
+                            "  `id` int(11) primary key,\n" +
+                            "  `date_and_time` datetime(6) ,\n" +
+                            "  `status` varchar(10) ,\n" +
+                            "  `amount` double ,\n" +
+                            "  `appointmentid_id` int(11) \n" +
                             ");\n";
 
             data.execSQL(createOrders);
 
             String createService =
                     "CREATE TABLE IF NOT EXISTS `service` (\n" +
-                            "  `id` int(11) NOT NULL Primary Key,\n" +
-                            "  `title` varchar(30)  NOT NULL,\n" +
-                            "  `providerid_id` int(11) NOT NULL,\n" +
-                            "  `city` varchar(15)  NOT NULL,\n" +
-                            "  `day` varchar(10)  NOT NULL,\n" +
-                            "  `location` varchar(30)  NOT NULL,\n" +
-                            "  `description` varchar(300)  NOT NULL,\n" +
-                            "  `time_start_h` varchar(2)  NOT NULL,\n" +
-                            "  `time_start_m` varchar(2)  NOT NULL,\n" +
-                            "  `time_end_h` varchar(2)  NOT NULL,\n" +
-                            "  `time_end_m` varchar(2)  NOT NULL,\n" +
-                            "  `status` varchar(10)  NOT NULL,\n" +
-                            "  `stype` varchar(10)  NOT NULL,\n" +
-                            "  `cost` double NOT NULL,\n" +
-                            "  `phone_no` varchar(10)  NOT NULL,\n" +
-                            "  `image` varchar(30)  NOT NULL\n" +
+                            "  `id` int(11) primary key,\n" +
+                            "  `title` varchar(30)  ,\n" +
+                            "  `providerid_id` int(11) ,\n" +
+                            "  `city` varchar(15)  ,\n" +
+                            "  `day` varchar(10)  ,\n" +
+                            "  `location` varchar(30)  ,\n" +
+                            "  `description` varchar(300)  ,\n" +
+                            "  `time_start_h` varchar(2)  ,\n" +
+                            "  `time_start_m` varchar(2)  ,\n" +
+                            "  `time_end_h` varchar(2)  ,\n" +
+                            "  `time_end_m` varchar(2)  ,\n" +
+                            "  `status` varchar(10)  ,\n" +
+                            "  `stype` varchar(10)  ,\n" +
+                            "  `cost` double ,\n" +
+                            "  `phone_no` varchar(10)  ,\n" +
+                            "  `image` varchar(30)  \n" +
                             ");\n";
 
             data.execSQL(createService);
 
             String createServiceType =
                     "CREATE TABLE IF NOT EXISTS `servicetype` (\n" +
-                            "  `id` int(11) NOT NULL Primary Key,\n" +
-                            "  `name` varchar(30) NOT NULL\n" +
+                            "  `id` int(11) primary key,\n" +
+                            "  `name` varchar(30)\n" +
                             ");\n";
 
             data.execSQL(createServiceType);
@@ -141,27 +141,38 @@ public class Database {
 
             String createSP =
                     "CREATE TABLE IF NOT EXISTS `sp` (\n" +
-                            "  `id` int(11) NOT NULL Primary Key,\n" +
-                            "  `name` varchar(20)  NOT NULL,\n" +
-                            "  `email` varchar(128)  NOT NULL,\n" +
-                            "  `phone_no` varchar(10)  NOT NULL,\n" +
-                            "  `password` varchar(30)  NOT NULL,\n" +
-                            "  `city` varchar(20)  NOT NULL,\n" +
-                            "  `status` varchar(10)  NOT NULL\n" +
+                            "  `id` int(11) primary key,\n" +
+                            "  `name` varchar(20)  ,\n" +
+                            "  `email` varchar(128)  ,\n" +
+                            "  `phone_no` varchar(10)  ,\n" +
+                            "  `password` varchar(30)  ,\n" +
+                            "  `city` varchar(20)  ,\n" +
+                            "  `status` varchar(10)  \n" +
                             ");\n";
 
             data.execSQL(createSP);
 
             String createMessage =
                     "Create table if not EXISTS message\n" +
-                            "(id int(11) PRIMARY KEY,\n" +
+                            "(id int(11) primary key,\n" +
                             "aptid int(11),\n" +
-                            "message varchar(32) NOT NULL,\n" +
+                            "message varchar(32) ,\n" +
                             "type_of_msg varchar(6),\n" +
                             "FOREIGN KEY(aptid) REFERENCES appointment(id)\n" +
                             ");";
 
             data.execSQL(createMessage);
+
+            String createSync =
+                    "Create table if not EXISTS sync\n" +
+                            "(id int(11) primary key,\n" +
+                            "tbl varchar,\n" +
+                            "col varchar,\n" +
+                            "val varchar,\n" +
+                            "md varchar(2)"+
+                            ");";
+
+            data.execSQL(createSync);
 
             //data.execSQL("commit;");
 
@@ -170,7 +181,6 @@ public class Database {
             Log.d(" - Log Message Error: ", e.toString());
         }
         Log.d(" - LogMessage: ", path);
-
     }
 
     public Cursor query(String query, String[] args) {
