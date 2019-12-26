@@ -1,5 +1,7 @@
 package com.spksolutions.appointmentmaster;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.ContentValues;
 import android.content.SearchRecentSuggestionsProvider;
@@ -35,8 +37,10 @@ import com.google.firebase.FirebaseOptions;
 import com.spksolutions.appointmentmaster.R;
 
 import com.spksolutions.appointmentmaster.data.Database;
+import com.spksolutions.appointmentmaster.data.OnlineData;
 
 import android.view.Menu;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -47,11 +51,14 @@ public class MainActivity extends AppCompatActivity {
     private Database data;
     private SharedPreferences preferences;
     DatabaseProvider provider;
+    Intent i;
+    Loading_Activity l;
+    static boolean flag_loading_done = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -80,22 +87,30 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        provider = new DatabaseProvider();
+        //provider = new DatabaseProvider();
         //data = new Database(getFileStreamPath("").getAbsolutePath());
 
-        provider.setPreferences(getPath(),getApplicationContext().getPackageName());
+        /*provider.setPreferences(getPath(),getApplicationContext().getPackageName());
         provider.query(Uri.parse(provider.AUTHORITY+"/"+provider.TABLE_APPOINTMENT+"/22"),null,null,null,null);
         ContentValues val = new ContentValues();
         val.put(DatabaseProvider.CITY_ID,"30");
         val.put(DatabaseProvider.CITY_NAME,"Jamnagar");
-        provider.insert(DatabaseProvider.CITY_URI,val);
+        provider.insert(DatabaseProvider.CITY_URI,val);*/
 
+
+        flag_loading_done = true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        //new OnlineData();
     }
 
 

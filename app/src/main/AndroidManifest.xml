@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@drawable/appointmentmaster"
         android:label="@string/app_name"
@@ -16,10 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".Loading_Activity"></activity>
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5086753515756321~7788115596" />
-
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />
@@ -27,35 +29,37 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data android:name="android.app.default_searchable"
+            android:theme="@style/AppThemeLauncher"
+            >
+            <meta-data
+                android:name="android.app.default_searchable"
                 android:value=".SearchActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".SearchActivity"
+        <activity
+            android:name=".SearchActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        
-        <provider
-            android:authorities="com.spksolutions.appointmentmaster.suggestionProvider"
-            android:name=".ContentProviderForSearchSuggestion"
-            />
 
         <provider
-            android:authorities="com.spksolutions.appointmentmaster.dataProvider"
+            android:name=".ContentProviderForSearchSuggestion"
+            android:authorities="com.spksolutions.appointmentmaster.suggestionProvider" />
+        <provider
             android:name=".DatabaseProvider"
-            />
-        
+            android:authorities="com.spksolutions.appointmentmaster.dataProvider" />
     </application>
 
 </manifest>

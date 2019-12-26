@@ -45,8 +45,8 @@ public class Database {
                     "  `id` int(11) PRIMARY KEY ,\n" +
                     "  `clientid_id` int(11) ,\n" +
                     "  `serviceid_id` int(11) ,\n" +
-                    "  `time` time(6) ,\n" +
-                    "  `date` date ,\n" +
+                    "  `order_time` time(6) ,\n" +
+                    "  `order_date` date ,\n" +
                     "  `description` varchar(288) ,\n" +
                     "  `status` varchar(10) ,\n" +
                     "  `payment_status` varchar(10) \n" +
@@ -89,7 +89,8 @@ public class Database {
             String createOrders =
                     "CREATE TABLE IF NOT EXISTS `orders` (\n" +
                             "  `id` int(11) primary key,\n" +
-                            "  `date_and_time` datetime(6) ,\n" +
+                            "  `order_date` date ,\n" +
+                            "  `order_time` time ,\n" +
                             "  `status` varchar(10) ,\n" +
                             "  `amount` double ,\n" +
                             "  `appointmentid_id` int(11) \n" +
@@ -106,13 +107,12 @@ public class Database {
                             "  `day` varchar(10)  ,\n" +
                             "  `location` varchar(30)  ,\n" +
                             "  `description` varchar(300)  ,\n" +
-                            "  `time_start_h` varchar(2)  ,\n" +
-                            "  `time_start_m` varchar(2)  ,\n" +
-                            "  `time_end_h` varchar(2)  ,\n" +
-                            "  `time_end_m` varchar(2)  ,\n" +
+                            "  `time_start` time  ,\n" +
+                            "  `time_end` time  ,\n" +
                             "  `status` varchar(10)  ,\n" +
                             "  `stype` varchar(10)  ,\n" +
                             "  `cost` double ,\n" +
+                            "  `date_start` date ,\n" +
                             "  `phone_no` varchar(10)  ,\n" +
                             "  `image` varchar(30)  \n" +
                             ");\n";
@@ -157,6 +157,8 @@ public class Database {
                             "(id int(11) primary key,\n" +
                             "aptid int(11),\n" +
                             "message varchar(32) ,\n" +
+                            "message_time time ,\n" +
+                            "message_date date ,\n" +
                             "type_of_msg varchar(6),\n" +
                             "FOREIGN KEY(aptid) REFERENCES appointment(id)\n" +
                             ");";

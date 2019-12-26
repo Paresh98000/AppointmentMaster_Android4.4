@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    &lt;!&ndash; Your product logo - 144dp color version of your app icon &ndash;&gt;-->
+<!--    <item-->
+<!--        >-->
+<!--&lt;!&ndash;        <layer-list>&ndash;&gt;-->
+<!--&lt;!&ndash;            <item&ndash;&gt;-->
+<!--&lt;!&ndash;                android:drawable="@drawable/whitebackground"></item>&ndash;&gt;-->
+<!--&lt;!&ndash;            &lt;!&ndash;<item&ndash;&gt;-->
+<!--&lt;!&ndash;                >&ndash;&gt;-->
+<!--&lt;!&ndash;                <bitmap android:src="@drawable/loader1" android:filter="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:gravity="center"></bitmap>&ndash;&gt;-->
+<!--&lt;!&ndash;            </item>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <item&ndash;&gt;-->
+<!--&lt;!&ndash;                >&ndash;&gt;-->
+
+<!--&lt;!&ndash;            </item>&ndash;&gt;-->
+<!--&lt;!&ndash;        </layer-list>&ndash;&gt;-->
+<!--        -->
+<!--        <animation-list-->
+<!--            android:oneshot="false">-->
+<!--            <item android:drawable="@drawable/appointmentmaster" android:duration="10" />-->
+<!--            <item android:drawable="@drawable/schedule_1" android:duration="1"/>-->
+<!--        </animation-list>-->
+<!--    </item>-->
+<!--</selector>-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/appointment_background"
+        />
+</selector>

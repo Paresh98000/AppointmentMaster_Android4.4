@@ -33,4 +33,11 @@
     <string name="menu_message">Message</string>
     <string name="menu_user_sign_in">User Sign In</string>
     <string name="menu_user_sign_up">User Sign Up</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">1:980981162288:android:83a41dfbeb9f0c2af2a8f5</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">https://www.facebook.com/PareshSharmaL</string>
+    <!-- Twitter consumer key and secret -->
+    <!--    <string name="twitter_consumer_key" translatable="false">YOUR_CONSUMER_KEY</string>-->
+    <!--    <string name="twitter_consumer_secret" translatable="false">YOUR_CONSUMER_SECRET</string>-->
 </resources>
