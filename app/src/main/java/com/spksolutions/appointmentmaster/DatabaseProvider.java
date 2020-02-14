@@ -223,12 +223,13 @@ public class DatabaseProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+        Log.d(" DatabaseProvider",uri.getPathSegments().toString());
         if(uri.getPathSegments().size()>1){
             String table = uri.getPathSegments().get(1);
             return database.insert(table,values);
         }
         else
-            return null;
+            return Uri.parse(" Database Provider Error ");
     }
 
     @Override

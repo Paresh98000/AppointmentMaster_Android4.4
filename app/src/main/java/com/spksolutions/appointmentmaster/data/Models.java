@@ -1,72 +1,109 @@
 package com.spksolutions.appointmentmaster.data;
 
-import java.sql.Date;
-import java.sql.Time;
+import android.util.Log;
+
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 public class Models {
 
-    public Models(){}
+    public Models() {
+    }
 
-    public class Appointment{
+    public class Appointment {
         long id;
         long clientId;
         long serviceId;
-        Time time;
+        Date time;
         Date date;
-        String description,status,payment_status,time_h,time_m,date_day,date_month,date_year;
+        String description, status, payment_status;
 
-        public Appointment(){
+        public Appointment() {
 
         }
 
-        public Appointment(long id){
+        public Appointment(long id) {
             this();
             this.id = id;
         }
 
-        public Appointment(long id,long c_id){
+        public Appointment(long id, long c_id) {
             this(id);
             clientId = c_id;
         }
 
-        public Appointment(long id,long c_id,long serviceId){
-            this(id,c_id);
+        public Appointment(long id, long c_id, long serviceId) {
+            this(id, c_id);
             this.serviceId = serviceId;
         }
 
-        public Appointment(long id,long c_id,long serviceId,Time time){
-            this(id,c_id,serviceId);
+        public Appointment(long id, long c_id, long serviceId, Date time) {
+            this(id, c_id, serviceId);
             this.time = time;
         }
 
-        public Appointment(long id,long c_id,long serviceId,Time time,Date date){
-            this(id,c_id,serviceId,time);
+        public Appointment(long id, long c_id, long serviceId, Date time, Date date) {
+            this(id, c_id, serviceId, time);
             this.date = date;
         }
 
-        public Appointment(long id,long c_id,long serviceId,Time time,Date date,String description){
-            this(id,c_id,serviceId,time);
+        public Appointment(long id, long c_id, long serviceId, Date time, Date date, String description) {
+            this(id, c_id, serviceId, time);
             this.date = date;
         }
 
-        public Appointment(long id,long c_id,long serviceId,Time time,String description,String status,String payment_status){
-            this(id,c_id,serviceId,time);
+        public Appointment(long id, long c_id, long serviceId, Date time, String description, String status, String payment_status) {
+            this(id, c_id, serviceId, time);
             this.description = description;
             this.status = status;
             this.payment_status = payment_status;
         }
 
-        public Appointment(long id,long c_id,long serviceId,Time time,String description,String status){
-            this(id,c_id,serviceId,time);
+        public Appointment(long id, long c_id, long serviceId, Date time, String description, String status) {
+            this(id, c_id, serviceId, time);
             this.description = description;
             this.status = status;
             this.payment_status = "Not Done";
         }
+
+        public String getTime_str() {
+            String str;
+            DateFormat formate = new SimpleDateFormat("hh:mm:ss");
+            str = formate.format(time);
+            return str;
+        }
+
+        public String getDate_str() {
+            String str;
+            DateFormat formate = new SimpleDateFormat("dd/MM/yyyy");
+            str = formate.format(date);
+            return str;
+        }
+
+        public void setTime(String time) {
+            try {
+                this.time = new SimpleDateFormat("hh:mm:ss").parse(time);
+            } catch (Exception e) {
+                Log.d(" Log Message", " Time Error in Appointment Model " + e.toString());
+            }
+
+        }
+
+        public void setDate(String date) {
+            try {
+                this.date = new SimpleDateFormat("hh:mm:ss").parse(date);
+            } catch (Exception e) {
+                Log.d(" Log Message", " Date Error in Appointment Model " + e.toString());
+            }
+        }
     }
 
-    public class Client{
+    public class Client {
         long id;
-        String name;String gender;
+        String name;
+        String gender;
         String password;
         String phone_no;
         String email;
@@ -140,9 +177,9 @@ public class Models {
     }
 
     //Service Provider
-    public class SP{
+    public class SP {
         long id;
-        String name,email,phone_no,password,city,status;
+        String name, email, phone_no, password, city, status;
 
         public SP(long id, String name, String email, String phone_no, String password, String city, String status) {
             this.id = id;
@@ -211,22 +248,50 @@ public class Models {
         }
     }
 
-    public class Message{
+    public class Message {
         long id;
         long aptid;
-        String message,type_of_message,date_str,time_str;
+        String message, type_of_message;
         Date date;
-        Time time;
+        Date time;
 
-        public Message(long id, long aptid, String message, String type_of_message, String date_str, String time_str, Date date, Time time) {
+        public Message(long id, long aptid, String message, String type_of_message, Date date, Date time) {
             this.id = id;
             this.aptid = aptid;
             this.message = message;
             this.type_of_message = type_of_message;
-            this.date_str = date_str;
-            this.time_str = time_str;
             this.date = date;
             this.time = time;
+        }
+
+        public String getDate_str() {
+            String date_str;
+            DateFormat formate = new SimpleDateFormat("dd/MM/yyyy");
+            date_str = formate.format(date);
+            return date_str;
+        }
+
+        public String getTime_str() {
+            String time_str;
+            DateFormat formate = new SimpleDateFormat("hh:mm:ss");
+            time_str = formate.format(time);
+            return time_str;
+        }
+
+        public void setTime(String t) {
+            try {
+                date = new SimpleDateFormat("hh:mm:ss").parse(t);
+            } catch (Exception e) {
+                Log.d(" Log Error", " Time Error in Message Model: " + e.toString());
+            }
+        }
+
+        public void setDate(String d) {
+            try {
+                date = new SimpleDateFormat("dd/MM/yyyy").parse(d);
+            } catch (Exception e) {
+                Log.d(" Log Error", " Date Error in Message Model: " + e.toString());
+            }
         }
 
         public long getId() {
@@ -261,22 +326,6 @@ public class Models {
             this.type_of_message = type_of_message;
         }
 
-        public String getDate_str() {
-            return date_str;
-        }
-
-        public void setDate_str(String date_str) {
-            this.date_str = date_str;
-        }
-
-        public String getTime_str() {
-            return time_str;
-        }
-
-        public void setTime_str(String time_str) {
-            this.time_str = time_str;
-        }
-
         public Date getDate() {
             return date;
         }
@@ -285,16 +334,16 @@ public class Models {
             this.date = date;
         }
 
-        public Time getTime() {
+        public Date getTime() {
             return time;
         }
 
-        public void setTime(Time time) {
+        public void setTime(Date time) {
             this.time = time;
         }
     }
 
-    public class city{
+    public class city {
         int id;
         String name;
 
@@ -320,15 +369,15 @@ public class Models {
         }
     }
 
-    public class Service{
+    public class Service {
         long id;
-        String title,city,day,status,stype,phone_no,image_path;
+        String title, city, day, status, stype, phone_no, image_path;
         double cost;
         long provider_id;
-        Time time_start,time_end;
+        Date time_start, time_end;
         Date startDate;
 
-        public Service(long id, String title, String city, String day, String status, String stype, String phone_no, String image_path, double cost, long provider_id, Time time_start, Time time_end, Date startDate) {
+        public Service(long id, String title, String city, String day, String status, String stype, String phone_no, String image_path, double cost, long provider_id, Date time_start, Date time_end, Date startDate) {
             this.id = id;
             this.title = title;
             this.city = city;
@@ -424,19 +473,19 @@ public class Models {
             this.provider_id = provider_id;
         }
 
-        public Time getTime_start() {
+        public Date getTime_start() {
             return time_start;
         }
 
-        public void setTime_start(Time time_start) {
+        public void setTime_start(Date time_start) {
             this.time_start = time_start;
         }
 
-        public Time getTime_end() {
+        public Date getTime_end() {
             return time_end;
         }
 
-        public void setTime_end(Time time_end) {
+        public void setTime_end(Date time_end) {
             this.time_end = time_end;
         }
 
@@ -447,9 +496,43 @@ public class Models {
         public void setStartDate(Date startDate) {
             this.startDate = startDate;
         }
+
+        public String getTimeStart_str() {
+            String str;
+            DateFormat formate = new SimpleDateFormat("hh:mm:ss");
+            str = formate.format(time_start);
+            return str;
+        }
+
+        public void setTimeStart(String startTime) {
+            try {
+                time_start = new SimpleDateFormat("hh:mm:ss").parse(startTime);
+            } catch (Exception e) {
+                Log.d(" Log Message", " Time Error in Service Model " + e.toString());
+            }
+
+        }
+
+        public void setTimeEnd(String endTime) {
+            try {
+                time_end = new SimpleDateFormat("hh:mm:ss").parse(endTime);
+            } catch (Exception e) {
+                Log.d(" Log Message", " Time Error in Service Model " + e.toString());
+            }
+
+        }
+
+        public String getTimeEnd_str() {
+            String str;
+            DateFormat formate = new SimpleDateFormat("hh:mm:ss");
+            str = formate.format(time_end);
+            return str;
+        }
+
+
     }
 
-    public class ServiceType{
+    public class ServiceType {
         int id;
         String name;
 
@@ -473,5 +556,10 @@ public class Models {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+    public class Sync {
+        long id;
+        String tbl_r_id, tbl, col, val, md, qry;
     }
 }

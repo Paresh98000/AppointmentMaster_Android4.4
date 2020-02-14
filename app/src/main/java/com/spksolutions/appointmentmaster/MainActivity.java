@@ -48,12 +48,7 @@ import java.io.FileInputStream;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private Database data;
-    private SharedPreferences preferences;
     DatabaseProvider provider;
-    Intent i;
-    Loading_Activity l;
-    static boolean flag_loading_done = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,36 +78,37 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        //provider = new DatabaseProvider();
+        provider = new DatabaseProvider();
         //data = new Database(getFileStreamPath("").getAbsolutePath());
 
-        /*provider.setPreferences(getPath(),getApplicationContext().getPackageName());
+        provider.setPreferences(getPath(),getApplicationContext().getPackageName());
         provider.query(Uri.parse(provider.AUTHORITY+"/"+provider.TABLE_APPOINTMENT+"/22"),null,null,null,null);
         ContentValues val = new ContentValues();
         val.put(DatabaseProvider.CITY_ID,"30");
         val.put(DatabaseProvider.CITY_NAME,"Jamnagar");
-        provider.insert(DatabaseProvider.CITY_URI,val);*/
 
-
-        flag_loading_done = true;
+        //Uri output = provider.insert(DatabaseProvider.CITY_URI,val);
+        //Toast.makeText(getBaseContext(),output.getPathSegments().toString(),Toast.LENGTH_LONG).show();
+        new OnlineData();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        //new OnlineData();
-    }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

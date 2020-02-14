@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Environment;
@@ -13,6 +14,9 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import com.spksolutions.appointmentmaster.DatabaseProvider;
 import com.spksolutions.appointmentmaster.MainActivity;
@@ -21,6 +25,12 @@ public class Database {
 
     private static SQLiteDatabase data;
 
+    // if database file is deleted
+    private boolean flag_data_lost;
+
+    public Database(){
+
+    }
 
     public Database(String path, String backup) {
 
@@ -43,6 +53,7 @@ public class Database {
             Log.d(" - Log Message: ", " Successfull");
             String createAppointment = "CREATE TABLE IF NOT EXISTS `appointment` (\n" +
                     "  `id` int(11) PRIMARY KEY ,\n" +
+                    "  `global_id` varchar UNIQUE ,\n" +
                     "  `clientid_id` int(11) ,\n" +
                     "  `serviceid_id` int(11) ,\n" +
                     "  `order_time` time(6) ,\n" +
@@ -57,6 +68,7 @@ public class Database {
             String createCity =
                     "CREATE TABLE IF NOT EXISTS `city` (\n" +
                             "  `id` int(11) primary key,\n" +
+                            "  `global_id` varchar UNIQUE ,\n" +
                             "  `name` varchar(30) \n" +
                             ");\n";
 
@@ -76,6 +88,7 @@ public class Database {
             String createClient =
                     "CREATE TABLE IF NOT EXISTS `client` (\n" +
                             "  `id` int(11) primary key,\n" +
+                            "  `global_id` varchar UNIQUE ,\n" +
                             "  `name` varchar(30)  ,\n" +
                             "  `gender` varchar(6)  ,\n" +
                             "  `password` varchar(30)  ,\n" +
@@ -89,6 +102,7 @@ public class Database {
             String createOrders =
                     "CREATE TABLE IF NOT EXISTS `orders` (\n" +
                             "  `id` int(11) primary key,\n" +
+                            "  `global_id` varchar UNIQUE ,\n" +
                             "  `order_date` date ,\n" +
                             "  `order_time` time ,\n" +
                             "  `status` varchar(10) ,\n" +
@@ -101,6 +115,7 @@ public class Database {
             String createService =
                     "CREATE TABLE IF NOT EXISTS `service` (\n" +
                             "  `id` int(11) primary key,\n" +
+                            "  `global_id` varchar UNIQUE ,\n" +
                             "  `title` varchar(30)  ,\n" +
                             "  `providerid_id` int(11) ,\n" +
                             "  `city` varchar(15)  ,\n" +
@@ -122,6 +137,7 @@ public class Database {
             String createServiceType =
                     "CREATE TABLE IF NOT EXISTS `servicetype` (\n" +
                             "  `id` int(11) primary key,\n" +
+                            "  `global_id` varchar ,\n" +
                             "  `name` varchar(30)\n" +
                             ");\n";
 
@@ -142,6 +158,7 @@ public class Database {
             String createSP =
                     "CREATE TABLE IF NOT EXISTS `sp` (\n" +
                             "  `id` int(11) primary key,\n" +
+                            "  `global_id` varchar UNIQUE ,\n" +
                             "  `name` varchar(20)  ,\n" +
                             "  `email` varchar(128)  ,\n" +
                             "  `phone_no` varchar(10)  ,\n" +
@@ -155,6 +172,7 @@ public class Database {
             String createMessage =
                     "Create table if not EXISTS message\n" +
                             "(id int(11) primary key,\n" +
+                            "`global_id` varchar UNIQUE ,\n" +
                             "aptid int(11),\n" +
                             "message varchar(32) ,\n" +
                             "message_time time ,\n" +
@@ -167,11 +185,13 @@ public class Database {
 
             String createSync =
                     "Create table if not EXISTS sync\n" +
-                            "(id int(11) primary key,\n" +
+                            "(id int(11) PRIMARY KEY,\n" +
                             "tbl varchar,\n" +
                             "col varchar,\n" +
                             "val varchar,\n" +
-                            "md varchar(2)"+
+                            "qry varchar,\n" +
+                            "tbl_r_id varchar,\n" +
+                            "md varchar(3)" +
                             ");";
 
             data.execSQL(createSync);
@@ -179,10 +199,9 @@ public class Database {
             //data.execSQL("commit;");
 
         } catch (Exception e) {
-
-            Log.d(" - Log Message Error: ", e.toString());
+            Log.d("Database Message: ", e.toString());
         }
-        Log.d(" - LogMessage: ", path);
+        Log.d(" - Database Message: ", path);
     }
 
     public Cursor query(String query, String[] args) {
@@ -190,18 +209,83 @@ public class Database {
     }
 
     public Uri insert(String table, ContentValues values) {
-
         long effect_rows = data.insert(table, null, values);
         if (effect_rows > 0) {
+
+            insert_to_sync(table,values,"insert","off");
+
             return Uri.parse(DatabaseProvider.AUTHORITY + "/" + table + "/" + values.getAsString("id"));
-        } else return null;
+
+        } else return Uri.parse(" Database Error ");
+    }
+
+    private void insert_to_sync(String table,ContentValues values,String qry,String mode){
+        long id;
+        Cursor c = data.rawQuery("Select count(*) from " + table, null);
+        if (c.moveToFirst()) {
+            id = c.getInt(0);
+            c.close();
+            Set<String> keys = values.keySet();
+            Iterator<String> it_k = keys.iterator();
+            ContentValues val_sync = new ContentValues();
+
+            do {
+                String k_str = it_k.next();
+
+                if(k_str.equals("id")) {
+                    continue;
+                }
+
+                val_sync.put("id", id);
+                id++;
+                val_sync.put("tbl", table);
+                val_sync.put("tbl_r_id", values.getAsString("id"));
+                val_sync.put("col", k_str);
+                val_sync.put("val", values.getAsString(k_str));
+                val_sync.put("qry",qry);
+                val_sync.put("md",mode);
+                if(data.insert("sync", null, val_sync)>0){
+                    Log.d(" Sync "+mode," table"+table+" "+val_sync.toString());
+                }else{
+                    Log.d(" Sync fail","Mode "+mode+" table "+table+" "+val_sync.toString());
+                }
+                val_sync.clear();
+            } while (it_k.hasNext());
+
+        } else {
+            Log.d(" Sync data lost", " Database "+qry+" "+table+" "+values.toString());
+        }
     }
 
     public int update(String table, ContentValues values, String whereClause, String[] args) {
-        return data.update(table, values, whereClause, args);
+        int updated = data.update(table, values, whereClause, args);
+        if(updated>0) {
+            insert_to_sync(table, values, "update", "off");
+            return updated;
+        }else
+            return 0;
     }
 
-    public int delete(String table, String whereClause, String[] args) {
-        return data.delete(table, whereClause, args);
+    //perform deletion
+    public int delete(String table, String whereClause, String[] args){
+        int deleted = data.delete(table, whereClause, args);
+        if(deleted>0){
+            ContentValues vals = new ContentValues();
+            for(int i=0;i<args.length;i++){
+                vals.put("col","ids");
+                vals.put("val",args[0]);
+            }
+            // args[0] = (1,2,3,4,5,6)
+            insert_to_sync(table,vals,"delete","off");
+            return deleted;
+        }
+        return 0;
+    }
+
+    static Cursor getSyncData(){
+        if (data!=null)
+        return data.rawQuery("Select * from Sync where Mode in(?,?) and qry = ?",new String[]{"On","on","insert"});
+        else
+            return null;
     }
 }

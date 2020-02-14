@@ -24,8 +24,17 @@
 <!--        </animation-list>-->
 <!--    </item>-->
 <!--</selector>-->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
     <item
-        android:drawable="@drawable/appointment_background"
-        />
+        android:drawable="@drawable/appointmentmaster"
+
+        >
+            <bitmap
+                
+                android:src="@drawable/appointmentmaster">
+
+            </bitmap>
+    </item>
 </selector>

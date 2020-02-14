@@ -20,17 +20,14 @@ public class Loading_Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                while(MainActivity.flag_loading_done){
-                    startActivity(i);
-                    l.finish();
-                }
-            }
-        });
-
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while(MainActivity.flag_loading_done){
+//                    startActivity(i);
+//                    l.finish();
+//                }
+//            }
+//        });
     }
-
 }
